@@ -1,0 +1,106 @@
+How to validate Configuration Files or Scripts in Linux
+
+for SUDO
+********************************************************
+You can check the sudo configuration file syntax using the visudo command, which supports a --check or -c command line option to only validate a file without an edit. 
+The -f option displays the error message and opens the file for editing:
+
+# visudo -c /etc/sudoers
+# visudo -c /etc/sudoers.d/new_config
+# visudo -f /etc/sudoers.d/new_config
+
+for BASH scripts
+******************************************************
+# bash -n /path/to/newscript.sh
+
+for PEARL scripts
+******************************************************
+# perl -c /path/to/yourscriptname
+
+for Systemd Unit Files
+******************************************************
+# systemd-analyze verify /etc/systemd/system/new.service
+
+OpenSSH Server
+******************************************************
+To check a particular configuration file, specify it using the -f flag.
+# sshd -t
+
+for NGINX 
+****************************************************
+# nginx -t
+# nginx -t -c /etc/nginx/conf.d/newexample.com.conf
+
+for Apache Web Server
+****************************************************
+# apachectl configtest
+
+for HAProxy TCP/HTTP Load Balancer
+****************************************************
+# haproxy -f /etc/haproxy/haproxy.cfg -c
+
+for  Apache Tomcat
+****************************************************
+# ./bin/catalina.sh configtest
+# $TOMCAT_HOME/bin/catalina.sh configtest
+
+for Squid Proxy Caching Server
+****************************************************
+# squid -k parse
+# squid -k debug
+
+for vsftpd FTP Server
+****************************************************
+# vsftpd
+# vsftpd -olisten=NO /path/to/vsftpd.testing.conf
+
+for MySQL Database Server
+****************************************************
+# mysqld --validate-config
+
+MariaDB Database Server
+****************************************************
+# mysqld --validate-config
+
+for  PostgreSQL Server
+****************************************************
+postgres=# select sourcefile, name,sourceline,error from pg_file_settings where error is not null;
+
+for Nagios Monitoring Tool
+****************************************************
+# nagios -v /usr/local/nagios/etc/nagios.cfg
+
+for Postfix Mail Server
+****************************************************
+# postfix check
+# postfix -vvv
+
+for Dovecot IMAP Server
+****************************************************
+# doveconf 1>/dev/null
+# echo $?
+It will exit with a zero error code if all is OK, otherwise, it exits with a non-zero error code and displays the error message
+
+for Samba File Server
+***************************************************
+# testparm -v
+
+for Syslogd/Rsyslogd
+***************************************************
+# rsyslogd -N1
+
+for DNS (BIND) Server
+***************************************************
+# named-checkconf /etc/named.conf
+
+for  NTP – Network Time Protocol
+***************************************************
+# ntpd -d -f /etc/ntp.conf -n
+
+for OpenStack-Ansible
+***************************************************
+# openstack-ansible setup-infrastructure.yml --syntax-check
+
+for Logrotate
+**************************************************
+# logrotate -d /etc/logrotate.d/nginx
