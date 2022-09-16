@@ -1,0 +1,18 @@
+The recommended permissions for /home/username/.ssh are read/write/execute for the user, and must not be accessible by group and others.
+
+# chmod u+rwx,go-rwx ~/.ssh
+# chmod  0700 ~/.ssh
+
+If ssh complains of wrong permissions on any of the above files, you can set the correct permissions for any of the files like this.
+
+# chmod u+rw,go-rwx .ssh/id_rsa
+# chmod u+rw,go-rwx .ssh/id_rsa.pub
+# chmod u+rw,go-rwx .ssh/authorized_keys
+# chmod u+rw,go-rwx .ssh/known_hosts
+# chmod u+rw,go-rwx .ssh/config
+OR
+# chmod 600 .ssh/id_rsa
+# chmod 600 .ssh/id_rsa.pub
+# chmod 600 .ssh/authorized_keys
+# chmod 600 .ssh/known_hosts
+# chmod 600 .ssh/config
